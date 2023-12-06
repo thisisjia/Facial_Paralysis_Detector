@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import os
 
 st.title('File Upload to FastAPI')
 
@@ -11,22 +10,11 @@ if uploaded_file is not None:
     file_details = {"FileName": uploaded_file.name, "FileType": uploaded_file.type}
     st.write(file_details)
 
-    # Save the file to a temporary location
-    if not os.path.exists('tempDir'):
-        os.mkdir('tempDir')
-    temp_file_path = os.path.join('tempDir', uploaded_file.name)
-
-    with open(temp_file_path, "wb") as f:
-        f.write(uploaded_file.getbuffer())
-
+    # url = 'http://localhost:8000/uploadfile/'  # Replace with your FastAPI URL
     # Send the file to FastAPI server
-    url = 'http://localhost:8000/uploadfile/'  # Replace with your FastAPI URL
-    with open(temp_file_path, 'rb') as f:
-        files = {'file': (uploaded_file.name, f)}
-        response = requests.post(url, files=files)
-
-    # Remove the file after upload
-    os.remove(temp_file_path)
+    url = 'https://strokediag-xwy6mzfeuq-wn.a.run.app/uploadfile/'
+    files = {'file': (uploaded_file.name, uploaded_file, uploaded_file.type)}
+    response = requests.post(url, files=files)
 
     # Show the response from the server
     if response.status_code == 200:
@@ -35,4 +23,4 @@ if uploaded_file is not None:
     else:
         st.error('An error occurred during upload.')
         st.write('Status code:', response.status_code)
-        st.write('Response body:', response.json())
+        st.write('Response body:', response.text)
