@@ -1,13 +1,15 @@
 import streamlit as st
 import requests
 
-st.title('Stroke Prediction')
-uploaded_files = st.sidebar.file_uploader("Upload pairs of files (e.g., nostroke_01.png, stroke_01.png)",
+st.markdown("<h1 style='text-align: left;'>Stroke Prediction</h1>", unsafe_allow_html=True)
+
+uploaded_files = st.sidebar.file_uploader("Upload pairs of files for prediction",
     type=["png", "jpg"], accept_multiple_files=True)
 
 # Check if files were uploaded and there's an even number for pairs
 if uploaded_files and len(uploaded_files) % 2 == 0:
     # Iterate over the files in pairs
+    uploaded_files = sorted(uploaded_files, key=lambda x: x.name)
     for i in range(0, len(uploaded_files), 2):
         nostroke_file = uploaded_files[i]
         stroke_file = uploaded_files[i + 1]

@@ -16,6 +16,11 @@ if uploaded_files:
             # Process and display the first image in the first column
             with col1:
                 st.image(file1, width=240)
+            with col2:
+                st.image(file2, width=240)
+            # Process and display the first image in the first column
+            with col1:
+                # st.image(file1, width=240)
                 files = {'file': (file1.name, file1, file1.type)}
                 response_file1 = requests.post(url, files=files)
                 if response_file1.status_code == 200:
@@ -27,7 +32,7 @@ if uploaded_files:
                     st.error('Error with First Image:', response_file1.text)
             # Process and display the second image in the second column
             with col2:
-                st.image(file2, width=240)
+                # st.image(file2, width=240)
                 files = {'file': (file2.name, file2, file2.type)}
                 response_file2 = requests.post(url, files=files)
                 if response_file2.status_code == 200:
