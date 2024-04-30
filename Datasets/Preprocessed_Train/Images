@@ -1,1 +1,5 @@
-Images used for training - preprocessed (face detection & cropping)
+#Images used for training - preprocessed (face detection & cropping)
+
+#11 Folders of Healthy Face Dataset - Train - 877 Images
+#1 Folder of Facial Paralytic Face Dataset - 692 Images
+#Total = 1569 images
